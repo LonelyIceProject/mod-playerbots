@@ -10,6 +10,7 @@
 #include "BWLTriggerContext.h"
 #include "ChatTriggerContext.h"
 #include "EoETriggerContext.h"
+#include "ExternalContexts.h"
 #include "GruulTriggerContext.h"
 #include "HyjalTriggerContext.h"
 #include "ICCTriggerContext.h"
@@ -76,4 +77,5 @@ void AiObjectContext::BuildSharedTriggerContexts(
     triggerContexts.Add(new WotlkDungeonFoSTriggerContext());
     triggerContexts.Add(new WotlkDungeonPoSTriggerContext());
     triggerContexts.Add(new WotlkDungeonToCTriggerContext());
+    PlayerbotExternalContexts::AddAll(triggerContexts);
 }

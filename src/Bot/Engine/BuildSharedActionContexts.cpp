@@ -11,6 +11,7 @@
 #include "BWLActionContext.h"
 #include "ChatActionContext.h"
 #include "EoEActionContext.h"
+#include "ExternalContexts.h"
 #include "GruulActionContext.h"
 #include "HyjalActionContext.h"
 #include "ICCActionContext.h"
@@ -76,4 +77,5 @@ void AiObjectContext::BuildSharedActionContexts(
     actionContexts.Add(new WotlkDungeonFoSActionContext());
     actionContexts.Add(new WotlkDungeonPoSActionContext());
     actionContexts.Add(new WotlkDungeonToCActionContext());
+    PlayerbotExternalContexts::AddAll(actionContexts);
 }

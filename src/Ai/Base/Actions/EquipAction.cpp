@@ -10,6 +10,7 @@
 #include "ItemPackets.h"
 #include "ItemUsageValue.h"
 #include "ItemVisitors.h"
+#include "LootStrategyValue.h"
 #include "Playerbots.h"
 #include "StatsWeightCalculator.h"
 #include <utility>
@@ -28,6 +29,36 @@ void EquipAction::EquipItems(ItemIds ids)
     {
         FindItemByIdVisitor visitor(*i);
         EquipItem(&visitor);
+    }
+}
+
+void EquipAction::EquipUpgrades(ItemIds ids)
+{
+    if (ids.empty() || !LootStrategyValue::KeepsBagsClean(botAI))
+    {
+        EquipItems(ids);
+        return;
+    }
+
+    std::vector<ObjectGuid> before;
+    for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; ++slot)
+        if (Item* item = bot->GetItemByPos(INVENTORY_SLOT_BAG_0, slot))
+            before.push_back(item->GetGUID());
+
+    EquipItems(ids);
+
+    // Taken off and now in the bags (an old main hand moved to the off hand is still worn). Bags and quivers stay;
+    // rare / epic gear stays too: the bot sells it at the next vendor (mod-custom sellGrey, soulbound and unneeded).
+    for (ObjectGuid const& guid : before)
+    {
+        Item* item = bot->GetItemByGuid(guid);
+        if (!item || item->IsEquipped() || item->GetTemplate()->Class == ITEM_CLASS_CONTAINER ||
+            item->GetTemplate()->Class == ITEM_CLASS_QUIVER || item->GetTemplate()->Quality >= ITEM_QUALITY_RARE)
+            continue;
+
+        LOG_DEBUG("playerbots", "{}: discards replaced {} ({})", bot->GetName(), item->GetTemplate()->Name1,
+                  item->GetEntry());
+        bot->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);
     }
 }
 
@@ -404,13 +435,13 @@ bool EquipUpgradesPacketAction::Execute(Event event)
     }
 
     ItemIds items = SelectInventoryItemsToEquip();
-    EquipItems(items);
+    EquipUpgrades(items);
     return true;
 }
 
 bool EquipUpgradeAction::Execute(Event /*event*/)
 {
     ItemIds items = SelectInventoryItemsToEquip();
-    EquipItems(items);
+    EquipUpgrades(items);
     return true;
 }

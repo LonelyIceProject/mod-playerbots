@@ -33,6 +33,53 @@ public:
     std::string const GetName() override { return "normal"; }
 };
 
+// mod-custom (party window default for bots of a real player): what the character can use, and valuables.
+// Upgrades, quest items, consumables / ammo / trade goods it needs, disenchant material of its enchanter, and
+// anything of uncommon (green) quality or better. No grey or white vendor trash (usage AH / VENDOR / BAD_EQUIP).
+class UsefulLootStrategy : public LootStrategy
+{
+public:
+    bool CanLoot(ItemTemplate const* proto, AiObjectContext* context) override
+    {
+        LootObject lootObject = AI_VALUE(LootObject, "loot target");
+        if (lootObject.guid.IsItem())
+            return true;   // opening a container / clam of the bot's own bags
+
+        return proto->Quality >= ITEM_QUALITY_UNCOMMON || LootStrategyValue::IsNeeded(context, proto->ItemId);
+    }
+
+    std::string const GetName() override { return "useful"; }
+};
+
+bool LootStrategyValue::IsNeeded(AiObjectContext* context, uint32 itemId)
+{
+    std::ostringstream out;
+    out << itemId;
+    switch (AI_VALUE2(ItemUsage, "item usage", out.str()))
+    {
+        case ITEM_USAGE_EQUIP:
+        case ITEM_USAGE_REPLACE:
+        case ITEM_USAGE_QUEST:
+        case ITEM_USAGE_SKILL:
+        case ITEM_USAGE_USE:
+        case ITEM_USAGE_KEEP:
+        case ITEM_USAGE_AMMO:
+        case ITEM_USAGE_DISENCHANT:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool LootStrategyValue::KeepsBagsClean(PlayerbotAI* botAI)
+{
+    if (!botAI || !IsRealPlayer(botAI->GetMaster()))
+        return false;
+
+    LootStrategy* strategy = botAI->GetAiObjectContext()->GetValue<LootStrategy*>("loot strategy")->Get();
+    return strategy == useful;
+}
+
 class GrayLootStrategy : public NormalLootStrategy
 {
 public:
@@ -74,11 +121,15 @@ LootStrategy* LootStrategyValue::normal = new NormalLootStrategy();
 LootStrategy* LootStrategyValue::gray = new GrayLootStrategy();
 LootStrategy* LootStrategyValue::disenchant = new DisenchantLootStrategy();
 LootStrategy* LootStrategyValue::all = new AllLootStrategy();
+LootStrategy* LootStrategyValue::useful = new UsefulLootStrategy();
 
 LootStrategy* LootStrategyValue::instance(std::string const strategy)
 {
     if (strategy == "*" || strategy == "all")
         return all;
+
+    if (strategy == "u" || strategy == "useful")
+        return useful;
 
     if (strategy == "g" || strategy == "gray")
         return gray;

@@ -781,8 +781,9 @@ void PlayerbotAI::HandleTeleportAck()
     if (!bot || !bot->GetSession())
         return;
 
-    // Skip acknowledgment for selfbots. The player's client handles that.
-    if (IsSelfBot(bot))
+    // Skip acknowledgment for selfbots. The player's client handles that. A client-less selfbot (a bot session
+    // made its own master, e.g. a tactics sim group leader) has no client, so it still needs the fake ack.
+    if (IsSelfBot(bot) && !bot->GetSession()->IsBot())
         return;
 
     /*
