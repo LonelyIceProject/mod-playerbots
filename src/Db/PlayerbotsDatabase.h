@@ -7,9 +7,9 @@
 #ifndef _PLAYERBOTS_DATABASE_H
 #define _PLAYERBOTS_DATABASE_H
 
+#include "DatabaseConnection.h"
 #include "DatabaseEnvFwd.h"
 #include "ModuleDatabasePool.h"
-#include "MySQLConnection.h"
 #include "PreparedStatement.h"
 #include "Transaction.h"
 #include <memory>
@@ -120,12 +120,12 @@ enum PlayerbotsDatabaseStatements : uint32
     MAX_PLAYERBOTS_STATEMENTS
 };
 
-class PlayerbotsDatabaseConnection : public MySQLConnection
+class PlayerbotsDatabaseConnection : public DatabaseConnection
 {
 public:
     typedef PlayerbotsDatabaseStatements Statements;
 
-    PlayerbotsDatabaseConnection(MySQLConnectionInfo& connInfo);
+    PlayerbotsDatabaseConnection(DatabaseConnectionInfo& connInfo);
     ~PlayerbotsDatabaseConnection() override;
 
     //! Loads database type specific prepared statements
@@ -165,7 +165,7 @@ public:
     [[nodiscard]] std::size_t QueueSize() const { return 0; }
 
 protected:
-    MySQLConnection* CreateConnection(MySQLConnectionInfo& connInfo) override
+    DatabaseConnection* CreateConnection(DatabaseConnectionInfo& connInfo) override
     {
         return new PlayerbotsDatabaseConnection(connInfo);
     }

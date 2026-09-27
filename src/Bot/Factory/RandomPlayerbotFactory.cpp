@@ -582,22 +582,12 @@ void RandomPlayerbotFactory::CreateRandomBots()
 
         uint32 timer = getMSTime();
 
-        // After ALL deletions, make sure data is commited to DB
-        LoginDatabase.Execute("COMMIT");
-        CharacterDatabase.Execute("COMMIT");
-        PlayerbotsDatabase.Execute("COMMIT");
-
         // Wait for all pending database operations to complete
         while (LoginDatabase.QueueSize() || CharacterDatabase.QueueSize() || PlayerbotsDatabase.QueueSize())
         {
             std::this_thread::sleep_for(1s);
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(100));    // Extra 100ms fixed delay for safety.
-
-        // Flush tables to ensure all data in memory are written to disk
-        LoginDatabase.Execute("FLUSH TABLES");
-        CharacterDatabase.Execute("FLUSH TABLES");
-        PlayerbotsDatabase.Execute("FLUSH TABLES");
 
         LOG_INFO("playerbots", ">> Random bot accounts and data deleted in {} ms", GetMSTimeDiffToNow(timer));
         LOG_INFO("playerbots", "Please reset the AiPlayerbot.DeleteRandomBotAccounts to 0 and restart the server...");

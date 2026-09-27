@@ -14,7 +14,6 @@
 #include "DBUpdater.h"
 #include "DatabaseEnv.h"
 #include "PlayerbotsDatabase.h"
-#include <mysqld_error.h>
 #include "GuildTaskMgr.h"
 #include "PlayerScript.h"
 #include "PlayerbotAIConfig.h"
@@ -44,22 +43,21 @@ public:
         PlayerbotsDatabase.SetConnectionInfo(dbString, synchThreads);
 
         bool const updatesEnabled = sConfigMgr->GetOption<bool>("Playerbots.Updates.EnableDatabases", true);
-        if (updatesEnabled && !DBUpdaterUtil::CheckExecutable())
+        if (updatesEnabled && !DBUpdaterUtil::CheckPrerequisites(PlayerbotsDatabase.GetBackend()))
             return false;
 
-        uint32 error = PlayerbotsDatabase.Open();
-        if (error == ER_BAD_DB_ERROR && updatesEnabled)
+        DbError error = PlayerbotsDatabase.OpenEx();
+        if (error.cls == DbErrorClass::DatabaseMissing && updatesEnabled)
         {
-            // Database missing: create it through the mysql CLI and connect again
             if (!ModuleDBUpdater::Create(PlayerbotsDatabase))
                 return false;
 
-            error = PlayerbotsDatabase.Open();
+            error = PlayerbotsDatabase.OpenEx();
         }
 
-        if (error)
+        if (error.IsError())
         {
-            LOG_ERROR("server.playerbots", "Cannot connect to the playerbots database, error {}", error);
+            LOG_ERROR("server.playerbots", "Cannot connect to the playerbots database, error {}: {}", error.native, error.message);
             return false;
         }
 
