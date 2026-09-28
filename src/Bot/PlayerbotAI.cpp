@@ -18,6 +18,7 @@
 #include "Engine.h"
 #include "EventProcessor.h"
 #include "ExternalEventHelper.h"
+#include "ExternalHooks.h"  // [mod-custom citizens]
 #include "GameObjectData.h"
 #include "GameTime.h"
 #include "GuildMgr.h"
@@ -1547,7 +1548,8 @@ void PlayerbotAI::DoNextAction(bool min)
         SetNextCheckDelay(sPlayerbotAIConfig.passiveDelay);
         return;
     }
-    else if (bot->isAFK() && !IsSelfBot(bot))
+    // [mod-custom citizens] H4: a pinned bot's AFK flag belongs to its citizen action.
+    else if (bot->isAFK() && !IsSelfBot(bot) && !PlayerbotExternalHooks::IsPinned(bot))
         bot->ToggleAFK();
 
     if (master && master->IsInWorld())
@@ -4604,6 +4606,11 @@ bool PlayerbotAI::AllowActive(ActivityType activityType)
 
     // always allow packet handling (e.g. group invites, trade, loot, friend requests etc)
     if (activityType == PACKET_ACTIVITY)
+        return true;
+
+    // [mod-custom citizens] H5: pinned bots exist only while a real player is in their city (or a GM
+    // test runs), so keep them fully active (triggers below relevance 100 are skipped otherwise).
+    if (PlayerbotExternalHooks::IsPinned(bot))
         return true;
 
     // all bots forced active, no rotation or scaling needed

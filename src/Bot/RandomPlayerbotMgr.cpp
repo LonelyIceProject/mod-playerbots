@@ -16,6 +16,7 @@
 #include "DBCStructure.h"
 #include "DatabaseEnv.h"
 #include "Define.h"
+#include "ExternalHooks.h"  // [mod-custom citizens]
 #include "FleeManager.h"
 #include "GridNotifiers.h"
 #include "GridNotifiersImpl.h"
@@ -1501,6 +1502,11 @@ bool RandomPlayerbotMgr::ProcessBot(Player* bot)
         LOG_INFO("playerbots", "Bot {} remove from group since leader is random bot.", bot->GetName().c_str());
     }
 
+    // [mod-custom citizens] H1: a pinned bot (city citizen) is not randomized or teleported for level;
+    // the revive above keeps working.
+    if (PlayerbotExternalHooks::IsPinned(bot))
+        return false;
+
     // only randomize and teleport idle bots
     bool idleBot = false;
     if (TravelTarget* target = botAI->GetAiObjectContext()->GetValue<TravelTarget*>("travel target")->Get())
@@ -1591,6 +1597,10 @@ void RandomPlayerbotMgr::RandomTeleport(Player* bot, std::vector<WorldLocation>&
 {
     // ignore when alrdy teleported or not in the world yet.
     if (bot->IsBeingTeleported() || !bot->IsInWorld())
+        return;
+
+    // [mod-custom citizens] H2: pinned bots stay where they are (revive, level-up, RandomizeFirst, bankers).
+    if (PlayerbotExternalHooks::IsPinned(bot))
         return;
 
     // no teleport / movement update when rooted.
