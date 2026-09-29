@@ -7,6 +7,7 @@
 #ifndef _PLAYERBOTS_DATABASE_H
 #define _PLAYERBOTS_DATABASE_H
 
+#include "PlayerbotsExport.h"
 #include "DatabaseConnection.h"
 #include "DatabaseEnvFwd.h"
 #include "ModuleDatabasePool.h"
@@ -171,6 +172,6 @@ protected:
     }
 };
 
-extern PlayerbotsDatabasePool PlayerbotsDatabase;
+extern PLAYERBOTS_API PlayerbotsDatabasePool PlayerbotsDatabase;
 
 #endif

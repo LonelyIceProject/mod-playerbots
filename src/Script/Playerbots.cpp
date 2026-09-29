@@ -24,6 +24,22 @@
 #include "RandomPlayerbotMgr.h"
 #include "ScriptMgr.h"
 #include "cmath"
+#if __has_include("PluginMgr.h")
+#include "PluginMgr.h"
+#endif
+
+namespace
+{
+    // Folder holding data/sql: the plugin folder when playerbots is loaded as a plugin, else the module sources.
+    std::string ModuleDirectory()
+    {
+#if __has_include("PluginMgr.h")
+        if (PluginInfo const* plugin = sPluginMgr->Find("playerbots"))
+            return plugin->dir.generic_string();
+#endif
+        return BuiltInConfig::GetSourceDirectory() + "/modules/mod-playerbots";
+    }
+}
 
 class PlayerbotsDatabaseScript : public DatabaseScript
 {
@@ -65,8 +81,8 @@ public:
         {
             DBUpdaterInfo const info = {
                 "Playerbots",
-                BuiltInConfig::GetSourceDirectory() + "/modules/mod-playerbots",
-                BuiltInConfig::GetSourceDirectory() + "/modules/mod-playerbots/data/sql/playerbots/base/",
+                ModuleDirectory(),
+                ModuleDirectory() + "/data/sql/playerbots/base/",
                 "db_playerbot"
             };
 
