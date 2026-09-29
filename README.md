@@ -1,3 +1,28 @@
+# mod-playerbots with plugin build and backend-neutral database
+
+This is a fork of [mod-playerbots/mod-playerbots](https://github.com/mod-playerbots/mod-playerbots) (branch
+`master`) for [LonelyIceProject/azerothcore-wotlk](https://github.com/LonelyIceProject/azerothcore-wotlk), an
+AzerothCore fork with a SQLite backend and runtime plugins. It still builds as a classic module in
+`modules/mod-playerbots` of a Playerbot-branch core.
+
+## Changes in this fork
+
+- **Backend-neutral database access.** The playerbots database is a `ModuleDatabasePool` on the core's
+  backend-neutral connection, so it runs on SQLite as well as MySQL; one update that SQLite cannot translate
+  has an override in `data/sql/overrides/sqlite`.
+- **Plugin build.** `CMakeLists.txt`, `plugin.json` and `plugin/plugin.cpp` build the module as a plugin library
+  for the fork's plugin loader; the module then reads its SQL from its plugin folder. Singletons are defined
+  in `.cpp` files so that plugins linking against playerbots share one instance.
+- **External hooks** (`src/Bot/Engine/ExternalHooks.h`): another module can pin random bots to a place (no
+  randomizing or teleports, AI kept active) and add strategies after the defaults.
+- **Hooks for companion modules**: self-bot teleport acknowledgement, external strategy contexts, and equip
+  and loot tweaks for bots of a real player (auto-equip keeps upgrades, a "useful" loot mode).
+
+## License
+
+GNU General Public License v2.0 or later, like the original; see [LICENSE](LICENSE).
+
+---
 <p align="center">
     <a href="https://github.com/mod-playerbots/mod-playerbots/blob/master/README.md">English</a>
     |
