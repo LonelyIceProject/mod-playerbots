@@ -1,0 +1,36 @@
+{
+  "group": { "en": "Bots", "ru": "Боты" },
+  "hint": { "en": "How many bots live in the world and what they do", "ru": "Сколько ботов живёт в мире и чем они заняты" },
+  "fields": [
+    { "key": "AiPlayerbot.Enabled", "type": "bool", "apply": "restart",
+      "label": { "en": "Bots enabled", "ru": "Боты включены" } },
+    { "key": "AiPlayerbot.MinRandomBots", "type": "int", "min": 0, "max": 5000, "apply": "restart",
+      "label": { "en": "Random bots, minimum", "ru": "Случайных ботов, минимум" },
+      "hint": { "en": "About 5 MB of memory and a share of CPU per bot", "ru": "Около 5 МБ памяти и доля процессора на каждого бота" } },
+    { "key": "AiPlayerbot.MaxRandomBots", "type": "int", "min": 0, "max": 5000, "apply": "restart",
+      "label": { "en": "Random bots, maximum", "ru": "Случайных ботов, максимум" } },
+    { "key": "AiPlayerbot.RandomBotMinLevel", "type": "int", "min": 1, "max": 80, "apply": "restart",
+      "label": { "en": "Bot level, from", "ru": "Уровень ботов, от" } },
+    { "key": "AiPlayerbot.RandomBotMaxLevel", "type": "int", "min": 1, "max": 80, "apply": "restart",
+      "label": { "en": "Bot level, to", "ru": "Уровень ботов, до" } },
+    { "key": "AiPlayerbot.RandomBotMaps", "type": "choice", "apply": "restart",
+      "label": { "en": "Maps for bots", "ru": "Карты для ботов" },
+      "options": [
+        { "value": "0,1,530,571", "label": { "en": "All continents", "ru": "Все континенты" } },
+        { "value": "0,1", "label": { "en": "Classic only", "ru": "Только классика" } },
+        { "value": "0,1,530", "label": { "en": "Classic and Outland", "ru": "Классика и Запределье" } },
+        { "value": "571", "label": { "en": "Northrend only", "ru": "Только Нордскол" } }
+      ] },
+    { "key": "AiPlayerbot.BotActiveAlone", "type": "int", "min": 0, "max": 100, "apply": "restart",
+      "label": { "en": "Active away from players, %", "ru": "Активны вдали от игрока, %" },
+      "hint": { "en": "The main CPU load lever", "ru": "Главный рычаг нагрузки на процессор" } },
+    { "key": "AiPlayerbot.MaxAddedBots", "type": "int", "min": 0, "max": 100, "apply": "restart",
+      "label": { "en": "Own bots per player", "ru": "Личных ботов на игрока" } },
+    { "key": "AiPlayerbot.RandomBotJoinLfg", "type": "bool", "apply": "restart",
+      "label": { "en": "Bots use the dungeon finder", "ru": "Боты ходят в поиск подземелий" } },
+    { "key": "AiPlayerbot.RandomBotJoinBG", "type": "bool", "apply": "restart",
+      "label": { "en": "Bots join battlegrounds", "ru": "Боты ходят на поля боя" } },
+    { "key": "AiPlayerbot.AllowGuildBots", "type": "bool", "apply": "restart",
+      "label": { "en": "Bot guilds", "ru": "Гильдии ботов" } }
+  ]
+}

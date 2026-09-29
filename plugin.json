@@ -15,5 +15,6 @@
     "characters": "data/sql/characters",
     "playerbots": { "config": "PlayerbotsDatabaseInfo", "base": "data/sql/playerbots/base", "updates": "data/sql/playerbots/updates" }
   },
-  "config": "conf/playerbots.conf.dist"
+  "config": "conf/playerbots.conf.dist",
+  "settings": "settings.json"
 }
