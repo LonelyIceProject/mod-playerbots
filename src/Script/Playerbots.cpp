@@ -59,8 +59,6 @@ public:
         PlayerbotsDatabase.SetConnectionInfo(dbString, synchThreads);
 
         bool const updatesEnabled = sConfigMgr->GetOption<bool>("Playerbots.Updates.EnableDatabases", true);
-        if (updatesEnabled && !DBUpdaterUtil::CheckPrerequisites(PlayerbotsDatabase.GetBackend()))
-            return false;
 
         DbError error = PlayerbotsDatabase.OpenEx();
         if (error.cls == DbErrorClass::DatabaseMissing && updatesEnabled)

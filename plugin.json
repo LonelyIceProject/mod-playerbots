@@ -1,13 +1,13 @@
 {
   "format": 1,
   "id": "playerbots",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Playerbots",
   "description": "Player bots for AzerothCore: random bots that live in the world and bots you invite to your party.",
   "authors": [ "mod-playerbots contributors" ],
   "license": "GPL-2.0-or-later",
   "homepage": "https://github.com/mod-playerbots/mod-playerbots",
-  "core": { "abi": "lonelyice-ac-1" },
+  "core": { "abi": "lonelyice-ac-2" },
   "platforms": [ "windows-x64" ],
   "server": { "library": "playerbots" },
   "databases": {
