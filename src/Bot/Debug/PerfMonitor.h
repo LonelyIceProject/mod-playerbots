@@ -73,12 +73,7 @@ private:
 class PerfMonitor
 {
 public:
-    static PerfMonitor& instance()
-    {
-        static PerfMonitor instance;
-
-        return instance;
-    }
+    static PerfMonitor& instance();
 
     static bool IsEnabled();
 

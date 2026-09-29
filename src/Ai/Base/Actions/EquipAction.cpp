@@ -48,7 +48,7 @@ void EquipAction::EquipUpgrades(ItemIds ids)
     EquipItems(ids);
 
     // Taken off and now in the bags (an old main hand moved to the off hand is still worn). Bags and quivers stay;
-    // rare / epic gear stays too: the bot sells it at the next vendor (mod-custom sellGrey, soulbound and unneeded).
+    // rare / epic gear stays too: the bot sells it at the next vendor (sellGrey, soulbound and unneeded).
     for (ObjectGuid const& guid : before)
     {
         Item* item = bot->GetItemByGuid(guid);

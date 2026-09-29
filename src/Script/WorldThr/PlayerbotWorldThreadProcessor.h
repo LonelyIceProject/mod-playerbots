@@ -33,12 +33,7 @@
 class PlayerbotWorldThreadProcessor
 {
 public:
-    static PlayerbotWorldThreadProcessor& instance()
-    {
-        static PlayerbotWorldThreadProcessor instance;
-
-        return instance;
-    }
+    static PlayerbotWorldThreadProcessor& instance();
 
     /**
      * @brief Update and process queued operations (called from world thread)

@@ -230,3 +230,9 @@ void PlayerbotTextMgr::ResetLocalePriority()
         botTextLocalePriority[i] = 0;
     }
 }
+
+PlayerbotTextMgr& PlayerbotTextMgr::instance()
+{
+    static PlayerbotTextMgr instance;
+    return instance;
+}

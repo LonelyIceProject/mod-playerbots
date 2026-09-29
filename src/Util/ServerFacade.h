@@ -30,12 +30,7 @@ public:
      *
      * @return ServerFacade& Reference to the singleton instance.
      */
-    static ServerFacade& instance()
-    {
-        static ServerFacade instance;
-
-        return instance;
-    }
+    static ServerFacade& instance();
 
 public:
     /**

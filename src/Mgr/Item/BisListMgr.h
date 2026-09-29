@@ -13,11 +13,7 @@
 class BisListMgr
 {
 public:
-    static BisListMgr* instance()
-    {
-        static BisListMgr inst;
-        return &inst;
-    }
+    static BisListMgr* instance();
 
     void LoadAll();
 

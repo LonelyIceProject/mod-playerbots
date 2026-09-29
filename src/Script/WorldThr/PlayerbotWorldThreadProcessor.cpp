@@ -199,3 +199,9 @@ PlayerbotWorldThreadProcessor::Statistics PlayerbotWorldThreadProcessor::GetStat
     std::lock_guard<std::mutex> statsLock(m_statsMutex);
     return m_stats;  // Return a copy
 }
+
+PlayerbotWorldThreadProcessor& PlayerbotWorldThreadProcessor::instance()
+{
+    static PlayerbotWorldThreadProcessor instance;
+    return instance;
+}

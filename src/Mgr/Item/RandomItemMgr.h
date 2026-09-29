@@ -163,12 +163,7 @@ typedef std::unordered_map<uint32, EquipByInventoryType> BotEquipCacheNew;
 class RandomItemMgr
 {
 public:
-    static RandomItemMgr& instance()
-    {
-        static RandomItemMgr instance;
-
-        return instance;
-    }
+    static RandomItemMgr& instance();
 
 public:
     void Init();

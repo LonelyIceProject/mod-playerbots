@@ -96,3 +96,9 @@ void PlayerbotRepository::SaveValue(uint32 guid, std::string const key, std::str
     stmt->SetData(2, value);
     PlayerbotsDatabase.Execute(stmt);
 }
+
+PlayerbotRepository& PlayerbotRepository::instance()
+{
+    static PlayerbotRepository instance;
+    return instance;
+}

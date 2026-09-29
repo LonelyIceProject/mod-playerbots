@@ -583,3 +583,9 @@ PerfMonitorScope::~PerfMonitorScope()
 
     RecordSample(data, (Now() - started).count());
 }
+
+PerfMonitor& PerfMonitor::instance()
+{
+    static PerfMonitor instance;
+    return instance;
+}

@@ -96,3 +96,9 @@ void PlayerbotCommandServer::Start()
     std::thread serverThread(Run);
     serverThread.detach();
 }
+
+PlayerbotCommandServer& PlayerbotCommandServer::instance()
+{
+    static PlayerbotCommandServer instance;
+    return instance;
+}

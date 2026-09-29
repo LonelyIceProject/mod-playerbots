@@ -1224,3 +1224,9 @@ std::vector<std::vector<uint32>> PlayerbotAIConfig::ParseTempPetTalentsOrder(uin
 
     return orders;
 }
+
+PlayerbotAIConfig& PlayerbotAIConfig::instance()
+{
+    static PlayerbotAIConfig instance;
+    return instance;
+}

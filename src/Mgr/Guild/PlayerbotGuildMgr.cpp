@@ -326,3 +326,9 @@ void PlayerBotsGuildValidationScript()
 {
     new BotGuildCacheWorldScript();
 }
+
+PlayerbotGuildMgr& PlayerbotGuildMgr::instance()
+{
+    static PlayerbotGuildMgr instance;
+    return instance;
+}

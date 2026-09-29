@@ -1169,3 +1169,9 @@ void AddSC_randombot_level_mgr()
     new RandomBotLevelWorldScript();
     new RandomBotLevelPlayerScript();
 }
+
+RandomBotLevelMgr& RandomBotLevelMgr::instance()
+{
+    static RandomBotLevelMgr instance;
+    return instance;
+}

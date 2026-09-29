@@ -4872,3 +4872,9 @@ void TravelMgr::PrepareDestinationCache()
     }
     LOG_INFO("playerbots", ">> {} flight masters and {} innkeepers and {} banker locations for level collected.", flightMastersCount, innkeepersCount, bankerCount);
 }
+
+TravelMgr& TravelMgr::instance()
+{
+    static TravelMgr instance;
+    return instance;
+}

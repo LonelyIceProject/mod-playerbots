@@ -3043,3 +3043,9 @@ uint32 RandomItemMgr::NormalizeLevel(uint32 level) const
                                      static_cast<uint32>(DEFAULT_MAX_LEVEL));
     return std::min(level, levelCap);
 }
+
+RandomItemMgr& RandomItemMgr::instance()
+{
+    static RandomItemMgr instance;
+    return instance;
+}

@@ -14,12 +14,7 @@
 class PlayerbotGuildMgr
 {
 public:
-    static PlayerbotGuildMgr& instance()
-    {
-        static PlayerbotGuildMgr instance;
-
-        return instance;
-    }
+    static PlayerbotGuildMgr& instance();
 
     void Init();
     std::string AssignToGuild(Player* player);

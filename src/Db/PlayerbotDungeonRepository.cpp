@@ -52,3 +52,9 @@ void PlayerbotDungeonRepository::LoadDungeonSuggestions()
     LOG_INFO("server.loading", "{} playerbots dungeon suggestions loaded in {} ms", count,
              GetMSTimeDiffToNow(oldMSTime));
 }
+
+PlayerbotDungeonRepository& PlayerbotDungeonRepository::instance()
+{
+    static PlayerbotDungeonRepository instance;
+    return instance;
+}

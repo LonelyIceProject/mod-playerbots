@@ -60,12 +60,7 @@ enum ChatReplyType
 class PlayerbotTextMgr
 {
 public:
-    static PlayerbotTextMgr& instance()
-    {
-        static PlayerbotTextMgr instance;
-
-        return instance;
-    }
+    static PlayerbotTextMgr& instance();
 
     std::string GetBotText(std::string name, std::map<std::string, std::string> placeholders);
     std::string GetBotText(std::string name);

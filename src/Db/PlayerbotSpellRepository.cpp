@@ -55,3 +55,9 @@ bool PlayerbotSpellRepository::IsItemBuyable(uint32 itemId) const
 {
     return vendorItems.find(itemId) != vendorItems.end();
 }
+
+PlayerbotSpellRepository& PlayerbotSpellRepository::Instance()
+{
+    static PlayerbotSpellRepository instance;
+    return instance;
+}

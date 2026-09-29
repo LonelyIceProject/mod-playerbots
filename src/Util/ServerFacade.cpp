@@ -78,3 +78,9 @@ void ServerFacade::SendPacket(Player* player, WorldPacket* packet)
 {
     player->GetSession()->SendPacket(packet);
 }
+
+ServerFacade& ServerFacade::instance()
+{
+    static ServerFacade instance;
+    return instance;
+}

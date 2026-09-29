@@ -16,12 +16,7 @@
 class SharedValueContext : public NamedObjectContext<UntypedValue>
 {
 public:
-    static SharedValueContext& instance()
-    {
-        static SharedValueContext instance;
-
-        return instance;
-    }
+    static SharedValueContext& instance();
 
     template <class T>
     Value<T>* getGlobalValue(std::string const name)

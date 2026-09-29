@@ -33,7 +33,7 @@ public:
     std::string const GetName() override { return "normal"; }
 };
 
-// mod-custom (party window default for bots of a real player): what the character can use, and valuables.
+// Default for bots of a real player: what the character can use, and valuables.
 // Upgrades, quest items, consumables / ammo / trade goods it needs, disenchant material of its enchanter, and
 // anything of uncommon (green) quality or better. No grey or white vendor trash (usage AH / VENDOR / BAD_EQUIP).
 class UsefulLootStrategy : public LootStrategy

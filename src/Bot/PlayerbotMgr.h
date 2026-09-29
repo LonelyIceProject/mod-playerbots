@@ -99,11 +99,7 @@ private:
 class PlayerbotsMgr
 {
 public:
-    static PlayerbotsMgr& instance()
-    {
-        static PlayerbotsMgr instance;
-        return instance;
-    }
+    static PlayerbotsMgr& instance();
 
     void AddPlayerbotData(Player* player, bool isBotAI);
     void RemovePlayerBotData(ObjectGuid const& guid, bool is_AI);

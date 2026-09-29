@@ -91,3 +91,9 @@ std::map<uint8, uint32> BisListMgr::GetBisForNearest(uint16 requestedIlvl, uint1
         *outResolved = 0;
     return {};
 }
+
+BisListMgr* BisListMgr::instance()
+{
+    static BisListMgr inst;
+    return &inst;
+}

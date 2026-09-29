@@ -477,12 +477,7 @@ public:
 class TravelNodeMap
 {
 public:
-    static TravelNodeMap& instance()
-    {
-        static TravelNodeMap instance;
-
-        return instance;
-    }
+    static TravelNodeMap& instance();
 
     TravelNode* addNode(WorldPosition pos, std::string const preferedName = "Travel Node", bool isImportant = false,
                         bool checkDuplicate = true, bool transport = false, uint32 transportId = 0);

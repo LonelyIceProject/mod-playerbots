@@ -1257,3 +1257,9 @@ bool GuildTaskMgr::CheckTaskTransfer(std::string const text, Player* ownerPlayer
 
     return true;
 }
+
+GuildTaskMgr& GuildTaskMgr::instance()
+{
+    static GuildTaskMgr instance;
+    return instance;
+}

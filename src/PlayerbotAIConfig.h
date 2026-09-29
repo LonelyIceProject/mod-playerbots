@@ -87,12 +87,7 @@ struct LevelBracketConfig
 class PlayerbotAIConfig
 {
 public:
-    static PlayerbotAIConfig& instance()
-    {
-        static PlayerbotAIConfig instance;
-
-        return instance;
-    }
+    static PlayerbotAIConfig& instance();
 
     bool Initialize();
     void LoadRandomBotLevelConfig();

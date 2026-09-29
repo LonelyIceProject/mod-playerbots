@@ -9,7 +9,7 @@
 #include "DKAiObjectContext.h"
 #include "DruidAiObjectContext.h"
 #include "Engine.h"
-#include "ExternalHooks.h"  // [mod-custom citizens]
+#include "ExternalHooks.h"
 #include "Group.h"
 #include "HunterAiObjectContext.h"
 #include "Item.h"
@@ -713,7 +713,7 @@ void AiFactory::AddDefaultNonCombatStrategies(Player* player, PlayerbotAI* const
         }
     }
 
-    // [mod-custom citizens] H3: last word on the non-combat strategies (survives ResetStrategies).
+    // External hooks have the last word on the non-combat strategies (survives ResetStrategies).
     PlayerbotExternalHooks::Decorate(player, nonCombatEngine, BOT_STATE_NON_COMBAT);
 }
 

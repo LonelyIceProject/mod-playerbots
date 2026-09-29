@@ -861,12 +861,7 @@ public:
         uint32        dbGuid;          // DB spawn GUID (for ObjectGuid construction)
     };
 
-    static TravelMgr& instance()
-    {
-        static TravelMgr instance;
-
-        return instance;
-    }
+    static TravelMgr& instance();
 
     void Clear();
     void LoadQuestTravelTable();

@@ -18,12 +18,7 @@
 class GuildTaskMgr
 {
 public:
-    static GuildTaskMgr& instance()
-    {
-        static GuildTaskMgr instance;
-
-        return instance;
-    }
+    static GuildTaskMgr& instance();
 
     void Update(Player* owner, Player* guildMaster);
 

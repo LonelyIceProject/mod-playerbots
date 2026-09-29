@@ -2577,3 +2577,9 @@ std::vector<uint32> TravelNodeMap::BuildPath(uint32 fromNode, uint32 toNode,
     std::reverse(path.begin(), path.end());
     return path;
 }
+
+TravelNodeMap& TravelNodeMap::instance()
+{
+    static TravelNodeMap instance;
+    return instance;
+}

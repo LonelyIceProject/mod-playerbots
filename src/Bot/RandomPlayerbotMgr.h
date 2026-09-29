@@ -91,12 +91,7 @@ private:
 class RandomPlayerbotMgr : public PlayerbotHolder
 {
 public:
-    static RandomPlayerbotMgr& instance()
-    {
-        static RandomPlayerbotMgr instance;
-
-        return instance;
-    }
+    static RandomPlayerbotMgr& instance();
 
     void LogPlayerLocation();
     void UpdateAIInternal(uint32 elapsed, bool minimal = false) override;

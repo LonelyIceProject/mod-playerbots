@@ -10,12 +10,7 @@
 class PlayerbotCommandServer
 {
 public:
-    static PlayerbotCommandServer& instance()
-    {
-        static PlayerbotCommandServer instance;
-
-        return instance;
-    }
+    static PlayerbotCommandServer& instance();
 
     void Start();
 

@@ -16,7 +16,7 @@
 #include "DBCStructure.h"
 #include "DatabaseEnv.h"
 #include "Define.h"
-#include "ExternalHooks.h"  // [mod-custom citizens]
+#include "ExternalHooks.h"
 #include "FleeManager.h"
 #include "GridNotifiers.h"
 #include "GridNotifiersImpl.h"
@@ -1502,7 +1502,7 @@ bool RandomPlayerbotMgr::ProcessBot(Player* bot)
         LOG_INFO("playerbots", "Bot {} remove from group since leader is random bot.", bot->GetName().c_str());
     }
 
-    // [mod-custom citizens] H1: a pinned bot (city citizen) is not randomized or teleported for level;
+    // A pinned bot is not randomized or teleported for level;
     // the revive above keeps working.
     if (PlayerbotExternalHooks::IsPinned(bot))
         return false;
@@ -1599,7 +1599,7 @@ void RandomPlayerbotMgr::RandomTeleport(Player* bot, std::vector<WorldLocation>&
     if (bot->IsBeingTeleported() || !bot->IsInWorld())
         return;
 
-    // [mod-custom citizens] H2: pinned bots stay where they are (revive, level-up, RandomizeFirst, bankers).
+    // Pinned bots stay where they are (revive, level-up, RandomizeFirst, bankers).
     if (PlayerbotExternalHooks::IsPinned(bot))
         return;
 
@@ -3241,4 +3241,10 @@ ObjectGuid RandomPlayerbotMgr::GetBattleMasterGUID(Player* bot, BattlegroundType
     }
 
     return battleMasterGUID;
+}
+
+RandomPlayerbotMgr& RandomPlayerbotMgr::instance()
+{
+    static RandomPlayerbotMgr instance;
+    return instance;
 }

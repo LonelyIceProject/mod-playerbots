@@ -24,12 +24,7 @@ class Player;
 class RandomBotLevelMgr
 {
 public:
-    static RandomBotLevelMgr& instance()
-    {
-        static RandomBotLevelMgr instance;
-
-        return instance;
-    }
+    static RandomBotLevelMgr& instance();
 
     void LoadConfig();
     void LogStartupSummary() const;

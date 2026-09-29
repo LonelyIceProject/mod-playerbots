@@ -15,12 +15,7 @@
 class PlayerbotRepository
 {
 public:
-    static PlayerbotRepository& instance()
-    {
-        static PlayerbotRepository instance;
-
-        return instance;
-    }
+    static PlayerbotRepository& instance();
 
     void Save(PlayerbotAI* botAI);
     void Load(PlayerbotAI* botAI);

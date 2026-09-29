@@ -13,12 +13,7 @@
 class PlayerbotSpellRepository
 {
 public:
-    static PlayerbotSpellRepository& Instance()
-    {
-        static PlayerbotSpellRepository instance;
-
-        return instance;
-    }
+    static PlayerbotSpellRepository& Instance();
 
     void Initialize();
 

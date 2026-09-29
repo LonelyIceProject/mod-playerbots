@@ -29,13 +29,13 @@ public:
     static LootStrategy* gray;
     static LootStrategy* all;
     static LootStrategy* disenchant;
-    static LootStrategy* useful;   // mod-custom
+    static LootStrategy* useful;
 
-    // mod-custom: what "useful" counts as needed by the character (upgrade, quest, consumable / ammo / trade goods
+    // What "useful" counts as needed by the character (upgrade, quest, consumable / ammo / trade goods
     // it uses, disenchant material) - valuables (green+) are not part of it.
     static bool IsNeeded(AiObjectContext* context, uint32 itemId);
-    // mod-custom: a bot of a real player on the "useful" loot mode throws away gear its auto-equip replaced and
-    // quest rewards / leftovers it does not need (EquipAction, mod-custom TacticsBagCleanup).
+    // A bot of a real player on the "useful" loot mode throws away gear its auto-equip replaced and
+    // quest rewards / leftovers it does not need (EquipAction, or a module's bag cleanup).
     static bool KeepsBagsClean(PlayerbotAI* botAI);
     static LootStrategy* instance(std::string const name);
 };

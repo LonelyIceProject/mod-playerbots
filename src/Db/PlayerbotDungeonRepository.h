@@ -25,12 +25,7 @@ struct DungeonSuggestion
 class PlayerbotDungeonRepository
 {
 public:
-    static PlayerbotDungeonRepository& instance()
-    {
-        static PlayerbotDungeonRepository instance;
-
-        return instance;
-    }
+    static PlayerbotDungeonRepository& instance();
 
     void LoadDungeonSuggestions();
     std::vector<DungeonSuggestion> const GetDungeonSuggestions();

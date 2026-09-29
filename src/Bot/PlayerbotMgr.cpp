@@ -1947,3 +1947,9 @@ void PlayerbotMgr::HandleUnlinkAccountCommand(Player* player, std::string const&
 
     ChatHandler(player->GetSession()).PSendSysMessage("Account unlinked successfully.");
 }
+
+PlayerbotsMgr& PlayerbotsMgr::instance()
+{
+    static PlayerbotsMgr instance;
+    return instance;
+}

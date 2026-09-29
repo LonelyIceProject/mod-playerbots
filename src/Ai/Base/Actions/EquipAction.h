@@ -25,7 +25,7 @@ public:
     ItemIds SelectInventoryItemsToEquip();
 
 protected:
-    // mod-custom: EquipItems for the automatic upgrade actions; gear they take off goes away when the bot keeps its
+    // EquipItems for the automatic upgrade actions; gear they take off goes away when the bot keeps its
     // bags clean (LootStrategyValue::KeepsBagsClean).
     void EquipUpgrades(ItemIds ids);
 
