@@ -25,12 +25,13 @@
       "label": { "en": "Active away from players, %", "ru": "Активны вдали от игрока, %" },
       "hint": { "en": "The main CPU load lever", "ru": "Главный рычаг нагрузки на процессор" } },
     { "key": "AiPlayerbot.MaxAddedBots", "type": "int", "min": 0, "max": 100, "apply": "restart",
-      "label": { "en": "Own bots per player", "ru": "Личных ботов на игрока" } },
+      "label": { "en": "Bots a player controls at once", "ru": "Ботов под управлением игрока одновременно" } },
     { "key": "AiPlayerbot.RandomBotJoinLfg", "type": "bool", "apply": "restart",
       "label": { "en": "Bots use the dungeon finder", "ru": "Боты ходят в поиск подземелий" } },
     { "key": "AiPlayerbot.RandomBotJoinBG", "type": "bool", "apply": "restart",
       "label": { "en": "Bots join battlegrounds", "ru": "Боты ходят на поля боя" } },
     { "key": "AiPlayerbot.AllowGuildBots", "type": "bool", "apply": "restart",
-      "label": { "en": "Bot guilds", "ru": "Гильдии ботов" } }
+      "label": { "en": "Guildmates' characters as bots", "ru": "Персонажи согильдийцев как боты" },
+      "hint": { "en": "Lets you add characters of your guild's members from other accounts as your own bots (.playerbots bot add)", "ru": "Позволяет добавлять персонажей членов вашей гильдии с других аккаунтов как своих ботов (.playerbots bot add)" } }
   ]
 }
