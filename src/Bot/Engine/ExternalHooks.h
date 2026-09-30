@@ -14,13 +14,15 @@
 class Engine;
 class Player;
 
-// Lets another module pin random bots to a place. Register while scripts load; the functions are only read
+// Lets other modules pin random bots to a place. Register while scripts load; the functions are only read
 // afterwards (from the world and map threads), so they must be thread-safe themselves. With nothing
 // registered every wrapper is a no-op / false and playerbots behaves exactly as before.
-//   isPinned(bot)              - true: RandomPlayerbotMgr leaves the bot alone (no randomize / random
-//                                teleport), the AI keeps it active and does not clear its AFK flag.
-//   decorate(bot, engine, st)  - called at the end of AiFactory::AddDefault*Strategies (before
-//                                Engine::Init), so the changes survive ResetStrategies; st is a BotState.
+// Every module may register its own pair (either function may be empty); all registered pairs are used:
+//   isPinned(bot)              - true from any of them: RandomPlayerbotMgr leaves the bot alone (no randomize /
+//                                random teleport), the AI keeps it active and does not clear its AFK flag.
+//   decorate(bot, engine, st)  - all of them are called, in registration order, at the end of
+//                                AiFactory::AddDefault*Strategies (before Engine::Init), so the changes survive
+//                                ResetStrategies; st is a BotState.
 // The registered functions live in one place (ExternalHooks.cpp), so this also works when playerbots and the
 // registering module are separate shared libraries.
 namespace PlayerbotExternalHooks

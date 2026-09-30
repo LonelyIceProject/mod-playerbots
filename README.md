@@ -13,8 +13,9 @@ AzerothCore fork with a SQLite backend and runtime plugins. It still builds as a
 - **Plugin build.** `CMakeLists.txt`, `plugin.json` and `plugin/plugin.cpp` build the module as a plugin library
   for the fork's plugin loader; the module then reads its SQL from its plugin folder. Singletons are defined
   in `.cpp` files so that plugins linking against playerbots share one instance.
-- **External hooks** (`src/Bot/Engine/ExternalHooks.h`): another module can pin random bots to a place (no
-  randomizing or teleports, AI kept active) and add strategies after the defaults.
+- **External hooks** (`src/Bot/Engine/ExternalHooks.h`): other modules can pin random bots to a place (no
+  randomizing or teleports, AI kept active) and add strategies after the defaults; every module's hooks are
+  kept and called in registration order.
 - **Hooks for companion modules**: self-bot teleport acknowledgement, external strategy contexts, and equip
   and loot tweaks for bots of a real player (auto-equip keeps upgrades, a "useful" loot mode).
 

@@ -6,36 +6,50 @@
 
 #include "ExternalHooks.h"
 
+#include <utility>
+#include <vector>
+
 namespace
 {
-    PlayerbotExternalHooks::IsPinnedFn& IsPinnedHook()
+    struct Hooks
     {
-        static PlayerbotExternalHooks::IsPinnedFn fn;
-        return fn;
-    }
+        PlayerbotExternalHooks::IsPinnedFn isPinned;
+        PlayerbotExternalHooks::DecorateFn decorate;
+    };
 
-    PlayerbotExternalHooks::DecorateFn& DecorateHook()
+    std::vector<Hooks>& RegisteredHooks()
     {
-        static PlayerbotExternalHooks::DecorateFn fn;
-        return fn;
+        static std::vector<Hooks> hooks;
+        return hooks;
     }
 }
 
 void PlayerbotExternalHooks::Register(IsPinnedFn isPinned, DecorateFn decorate)
 {
-    IsPinnedHook() = std::move(isPinned);
-    DecorateHook() = std::move(decorate);
+    if (!isPinned && !decorate)
+        return;
+
+    RegisteredHooks().push_back({ std::move(isPinned), std::move(decorate) });
 }
 
 bool PlayerbotExternalHooks::IsPinned(Player* bot)
 {
-    IsPinnedFn const& fn = IsPinnedHook();
-    return bot && fn && fn(bot);
+    if (!bot)
+        return false;
+
+    for (Hooks const& hooks : RegisteredHooks())
+        if (hooks.isPinned && hooks.isPinned(bot))
+            return true;
+
+    return false;
 }
 
 void PlayerbotExternalHooks::Decorate(Player* bot, Engine* engine, uint8 botState)
 {
-    DecorateFn const& fn = DecorateHook();
-    if (bot && engine && fn)
-        fn(bot, engine, botState);
+    if (!bot || !engine)
+        return;
+
+    for (Hooks const& hooks : RegisteredHooks())
+        if (hooks.decorate)
+            hooks.decorate(bot, engine, botState);
 }
