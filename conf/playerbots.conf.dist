@@ -2489,19 +2489,23 @@ AiPlayerbot.EnableICCBuffs = 1
 #
 #    PlayerbotsDatabaseInfo
 #        Description: Database connection settings for the playerbots server.
-#        Example:     "hostname;port;username;password;database"
+#        Example:     "sqlite:db/playerbots.sqlite;attach=characters=db/characters.sqlite"
+#                                               - (SQLite file, relative to the server working
+#                                                 directory; attach the characters database file
+#                                                 of CharacterDatabaseInfo under its name, which is
+#                                                 the file name without extension)
+#                     "hostname;port;username;password;database"
 #                     ".;somenumber;username;password;database" - (Use named pipes on Windows
 #                                                                 "enable-named-pipe" to [mysqld]
 #                                                                 section my.ini)
 #                     ".;/path/to/unix_socket;username;password;database" - (use Unix sockets on
 #                                                                           Unix/Linux)
-#                     "sqlite:db/playerbots.sqlite;attach=characters=db/characters.sqlite"
-#                                               - (SQLite file, relative to the server working
-#                                                 directory; attach the characters database under
-#                                                 the name used by CharacterDatabaseInfo)
-#        Default:     "127.0.0.1;3306;acore;acore;acore_playerbots"       - (PlayerbotDatabaseInfo)
+#                     A string without a "sqlite:" prefix is a MySQL connection string, e.g.
+#                     "127.0.0.1;3306;acore;acore;acore_playerbots"; MySQL needs the server to
+#                     provide that backend. Use the same backend as CharacterDatabaseInfo.
+#        Default:     "sqlite:db/playerbots.sqlite;attach=characters=db/characters.sqlite"
 
-PlayerbotsDatabaseInfo = "127.0.0.1;3306;acore;acore;acore_playerbots"
+PlayerbotsDatabaseInfo = "sqlite:db/playerbots.sqlite;attach=characters=db/characters.sqlite"
 
 #    PlayerbotsDatabase.WorkerThreads
 #        Description: The amount of worker threads spawned to handle asynchronous (delayed) MySQL
