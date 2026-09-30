@@ -5,6 +5,9 @@
  */
 
 #include "ExternalContexts.h"
+#include "Action.h"
+#include "Strategy.h"
+#include "Trigger.h"
 
 namespace PlayerbotExternalContexts
 {
