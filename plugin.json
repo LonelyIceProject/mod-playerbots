@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "playerbots",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "Playerbots",
   "description": "Player bots for AzerothCore: random bots that live in the world and bots you invite to your party.",
   "authors": [ "mod-playerbots contributors" ],
