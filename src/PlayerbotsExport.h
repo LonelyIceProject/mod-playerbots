@@ -8,8 +8,9 @@
 #define _PLAYERBOTS_EXPORT_H
 
 // Data that other plugins read from the playerbots plugin library needs dllimport on Windows. Functions and
-// classes are exported without it. In the static module build this is empty.
-#if defined(_WIN32) && defined(AC_PLUGIN_BUILD)
+// classes are exported without it. In the static module build and in a plugin built into the programs
+// (AC_PLUGIN_STATIC) this is empty.
+#if defined(_WIN32) && defined(AC_PLUGIN_BUILD) && !defined(AC_PLUGIN_STATIC)
 #  ifdef PLAYERBOTS_EXPORTS
 #    define PLAYERBOTS_API __declspec(dllexport)
 #  else
