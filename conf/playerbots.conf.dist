@@ -3,6 +3,10 @@
 ##################################################
 
 # Overview
+# Allow real group members to command AI bots in their own group. Disabled by default.
+# Does not grant control over live players or bots outside the group.
+AiPlayerbot.AllowGroupControl = 0
+
 # "Randombot": randomly generated bots that log in separately from players and populate the world. Randombots may automatically grind, quest, level up, and upgrade equipment and can be invited to groups and given commands.
 # "AddClass bot": bots from the AddClassAccountPoolSize accounts. They are used for quickly adding a leveled and geared bot of any class to your party. They are recommended for a quick formation of a party.
 # "Altbot": characters created on player accounts, which may be logged in by the player and invited to groups and given commands like randombots. They are best suited for long-progression playthroughs.

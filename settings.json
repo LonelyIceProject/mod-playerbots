@@ -2,6 +2,9 @@
   "group": { "en": "Bots", "ru": "Боты" },
   "hint": { "en": "How many bots live in the world and what they do", "ru": "Сколько ботов живёт в мире и чем они заняты" },
   "fields": [
+    { "key": "AiPlayerbot.AllowGroupControl", "type": "bool", "apply": "restart",
+      "label": { "en": "Shared party control", "ru": "Совместное управление отрядом" },
+      "hint": { "en": "Real party members may command the group's AI bots", "ru": "Живые участники группы могут отдавать команды её ботам" } },
     { "key": "AiPlayerbot.Enabled", "type": "bool", "apply": "restart",
       "label": { "en": "Bots enabled", "ru": "Боты включены" } },
     { "key": "AiPlayerbot.MinRandomBots", "type": "int", "min": 0, "max": 5000, "apply": "restart",

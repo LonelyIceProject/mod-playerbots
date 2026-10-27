@@ -631,6 +631,7 @@ bool PlayerbotAIConfig::Initialize()
     equipAndSpecPersistence = sConfigMgr->GetOption<bool>("AiPlayerbot.EquipAndSpecPersistence", true);
     equipAndSpecPersistenceLevel = sConfigMgr->GetOption<int32>("AiPlayerbot.EquipAndSpecPersistenceLevel", 1);
     groupInvitationPermission = sConfigMgr->GetOption<int32>("AiPlayerbot.GroupInvitationPermission", 1);
+    allowGroupControl = sConfigMgr->GetOption<bool>("AiPlayerbot.AllowGroupControl", false);
     keepAltsInGroup = sConfigMgr->GetOption<bool>("AiPlayerbot.KeepAltsInGroup", false);
     allowSummonInCombat = sConfigMgr->GetOption<bool>("AiPlayerbot.AllowSummonInCombat", true);
     allowSummonWhenMasterIsDead = sConfigMgr->GetOption<bool>("AiPlayerbot.AllowSummonWhenMasterIsDead", true);

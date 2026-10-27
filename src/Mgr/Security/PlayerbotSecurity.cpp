@@ -5,6 +5,7 @@
  */
 
 #include "PlayerbotSecurity.h"
+
 #include "LFGMgr.h"
 #include "PlayerbotAIConfig.h"
 #include "Playerbots.h"
@@ -46,6 +47,11 @@ PlayerbotSecurityLevel PlayerbotSecurity::LevelFor(Player* from, DenyReason* rea
 
         return PLAYERBOT_SECURITY_DENY_ALL;
     }
+
+    // Optional cooperative control is limited to real members of the bot's own group.
+    if (sPlayerbotAIConfig.allowGroupControl && bot->GetSession() && bot->GetSession()->IsBot() &&
+        !from->GetSession()->IsBot() && from->GetGroup() && from->GetGroup() == bot->GetGroup() && !ignoreGroup)
+        return PLAYERBOT_SECURITY_ALLOW_ALL;
 
     if (sPlayerbotAIConfig.IsInRandomAccountList(account))
     {

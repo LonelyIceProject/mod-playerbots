@@ -509,6 +509,9 @@ public:
     bool resetBotLevelIgnoreGuildWithRealPlayers;
     std::vector<std::string> resetBotLevelExcludeNames;
 
+    // Keep new configuration fields at the end to preserve member offsets for existing plugins.
+    bool allowGroupControl = false;
+
 private:
     PlayerbotAIConfig() = default;
     ~PlayerbotAIConfig() = default;
